@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  pz:
+    container_name: 'pz'
+    image: afey/zomboid
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    env_file:
+      - vars.env
+    environment:
+      SERVER_PORT: 16261
+      SERVER_PASSWORD: ""
+      SERVER_PUBLIC_NAME: "Anthesis Gaming - Private Project Zomboid Server"
+      SERVER_PUBLIC_DESC: "The same old Project Zomboid, customised to our liking, deployed by yours truly"
+    ports:
+      - "27433:8766/udp"
+      - "27434:8767/udp"
+      - "16261:16261/udp"
+      - "16262-16272:16262-16272"
+      - "27431:27015"
+    volumes:
+      - ./server-data:/server-data
+      - ./server-files:/server-files
+
+  db:
+    image: mysql:8.0.20
+    restart: always
+    volumes:
+      - 'mysql_data_dir:/var/lib/mysql'
+    environment:
+      MYSQL_DATABASE: 'pz-server-manager'
+      MYSQL_ROOT_PASSWORD: 'BPlftdvC2grgLafd2pkv'
+      MYSQL_USER: 'pz'
+      MYSQL_PASSWORD: 'kgJcrU9KN11o4u1ZzMtR'
+    command: ['--character-set-server=utf8', '--collation-server=utf8_general_ci', --default-authentication-plugin=mysql_native_password]
+    expose:
+      - "3306"
+
+  web-pz:
+    build: .
+    volumes:
+      - ./:/opt/pz
+      - ./run-server.sh:/run-server.sh
+      - ./wait-for-it.sh:/wait-for-it.sh
+    command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
+    links:
+      - "db:database"
+    depends_on:
+      - 'db'
+    environment:
+      LC_ALL: 'en_US.UTF-8'
+      LANG: 'en_US.UTF-8'
+      LANGUAGE: 'en_US.UTF-8'
+      MYSQL_DATABASE: 'pz-server-manager'
+      MYSQL_USER: 'pz'
+      MYSQL_PASSWORD: 'kgJcrU9KN11o4u1ZzMtR'
+      MYSQL_HOST: 'database'

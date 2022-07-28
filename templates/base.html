@@ -1,0 +1,43 @@
+<!DOCTYPE html>{% load static %}{% load i18n l10n %}
+<html>
+<head>
+    <meta charset=utf-8 />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %}Cool Farm Tool{% endblock title %}</title>
+
+    <link rel="icon" type="image/png" href="{% static "img/favicon.png" %}" />
+
+    {% block style %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    {% endblock style %}
+
+    {% block script %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    {% endblock script %}
+</head>
+<body>
+<div class="container p-0">
+
+    {% block content %}
+    {% endblock content %}
+
+    <footer id="page">
+        <section class="center">
+            <p>&copy; {% blocktrans with this_year=this_year|unlocalize %}Copyright 2013-{{ this_year }} Cool Farm Alliance. All rights reserved.{% endblocktrans %}</p>
+            <p>
+                <a href="{% url 'privacy' %}">{% trans "Privacy" %}</a> /
+                <a href="{% url 'license_agreement' %}">{% trans "License agreement" %}</a> /
+                <a href="{% url 'acceptable_use' %}">{% trans "Acceptable use" %}</a>
+            </p>
+        </section>
+    </footer>
+</div>
+</body>
+</html>
+
+{# vim: set fileencoding=utf-8 ai ts=4 sts=4 et sw=4: #}
