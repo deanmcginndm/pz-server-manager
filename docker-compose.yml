@@ -34,7 +34,8 @@ services:
       - vars.env
     environment:
       SERVER_PORT: 16261
-      SERVER_PASSWORD: ""
+      SERVER_PASSWORD: "temp"
+      SERVER_NAME: "anthesis-pzserver"
       SERVER_PUBLIC_NAME: "Anthesis Gaming - Private Project Zomboid Server"
       SERVER_PUBLIC_DESC: "The same old Project Zomboid, customised to our liking, deployed by yours truly"
       PYTHONPATH: "/pz"
@@ -52,7 +53,7 @@ services:
       - ./:/pz
       - ./pz/docker-entrypoint.sh:/pz/docker-entrypoint.sh
       - ./pz/wait-for-it.sh:/pz/wait-for-it.sh
-      - ./pz/server-data:/pz/server-data
+      - ./pz/server-data:/root/Zomboid
     stdin_open: true
 
     tty: true
