@@ -21,39 +21,16 @@ services:
     command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
     #command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0
 
-
-  web-pz:
-    build: .
-    container_name: bridges-web
-    ports:
-      - "8002:8000"
-    volumes:
-      - ./:/opt/pz-web
-      - ./docker-entrypoint.sh:/docker-entrypoint.sh
-      - ./wait-for-it.sh:/wait-for-it.sh
-    environment:
-      PYTHONPATH: "/opt/pz"
-      DJANGO_SETTIONGS_MODULE: "project_zomboid_manager.settings"
-    command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
-    links:
-      - "db:database"
-    depends_on:
-      - "db"
-      #environment:
-      #LC_ALL: 'en_US.UTF-8'
-      #LANG: 'en_US.UTF-8'
-      #LANGUAGE: 'en_US.UTF-8'
-    stdin_open: true
-    tty: true
   pz:
+    build: .
     container_name: 'pz'
     image: afey/zomboid
     restart: unless-stopped
-    tty: true
-    stdin_open: true
     depends_on:
       - 'db'
       - 'web-pz'
+    links:
+      - "db:database"
     env_file:
       - vars.env
     environment:
@@ -61,11 +38,19 @@ services:
       SERVER_PASSWORD: ""
       SERVER_PUBLIC_NAME: "Anthesis Gaming - Private Project Zomboid Server"
       SERVER_PUBLIC_DESC: "The same old Project Zomboid, customised to our liking, deployed by yours truly"
+      PYTHONPATH: "/opt/pz"
+      DJANGO_SETTIONGS_MODULE: "project_zomboid_manager.settings"
+    command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
     ports:
+      - "8002:8000"
       - "27433:8766/udp"
       - "27434:8767/udp"
       - "16261:16261/udp"
       - "16262-16272:16262-16272"
       - "27431:27015"
     volumes:
-      - ./pz_server_manager:/pz_server_manager
+      - ./:/opt/pz-web
+      - ./docker-entrypoint.sh:/docker-entrypoint.sh
+      - ./wait-for-it.sh:/wait-for-it.sh
+    stdin_open: true
+    tty: true
