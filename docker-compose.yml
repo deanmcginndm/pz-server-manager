@@ -2,12 +2,11 @@ version: '3'
 
 services:
   db:
-    image: mysql:5.7.21
+    image: mysql
     container_name: pz-web-db
     restart: always
     volumes:
       - 'mysql_data_dir:/var/lib/mysql'
-      - './dbbackup:/etc/mysql/conf.d/mysqldump2.cnf'
       #- './docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d'
     expose:
       - '3306'
