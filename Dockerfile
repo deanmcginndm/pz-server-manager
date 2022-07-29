@@ -7,7 +7,7 @@ ENV C_INCLUDE_PATH /usr/include/gdal
 WORKDIR /pz_server_manager
 RUN ls
 RUN pwd
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 RUN npm install -g bower
 # Set the locale
 RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
