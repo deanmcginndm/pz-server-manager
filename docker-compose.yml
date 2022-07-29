@@ -48,7 +48,7 @@ services:
       - "16262-16272:16262-16272"
       - "27431:27015"
     volumes:
-      - ./:/
+      - ./:/pz
       - ./docker-entrypoint.sh:/docker-entrypoint.sh
       - ./wait-for-it.sh:/wait-for-it.sh
     stdin_open: true
