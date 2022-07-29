@@ -51,8 +51,8 @@ services:
       - "27431:27015"
     volumes:
       - ./:/pz
-      - ./pz/docker-entrypoint.sh:/docker-entrypoint.sh
-      - ./pz/wait-for-it.sh:/wait-for-it.sh
+      - ./docker-entrypoint.sh:/pz/docker-entrypoint.sh
+      - ./wait-for-it.sh:/pz/wait-for-it.sh
       - ./pz/server-data:/root/Zomboid
     stdin_open: true
 
