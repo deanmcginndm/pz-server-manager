@@ -46,7 +46,7 @@ services:
   web-pz:
     build: .
     volumes:
-      - ./:/pz_server_manager
+      - ./:./
       - ./run-server.sh:/run-server.sh
       - ./wait-for-it.sh:/wait-for-it.sh
 #    command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
