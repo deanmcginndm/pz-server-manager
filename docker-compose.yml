@@ -41,7 +41,7 @@ services:
 #      PYTHONPATH: "/pz"
 #      DJANGO_SETTIONGS_MODULE: "project_zomboid_manager.settings"
 #      INSTDIR: "/pz/server-files/"
-    command: /pz/wait-for-it.sh db:3306 -t 5 -- /pz/docker-entrypoint.sh
+    command: tail -F /dev/null
     ports:
       - "8002:8000"
       - "27433:8766/udp"
