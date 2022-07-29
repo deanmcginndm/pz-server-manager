@@ -50,7 +50,7 @@ services:
       - "16262-16272:16262-16272"
       - "27431:27015"
     volumes:
-      - /pz:./
+      - /pz:./home/ubuntu/pz_server_manager
     stdin_open: true
 
     tty: true
