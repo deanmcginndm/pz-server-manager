@@ -46,7 +46,7 @@ services:
   web-pz:
     build: .
     volumes:
-      - ./:./
+      - ./:/
 #    command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
     links:
       - "db:database"
