@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y apt-utils git ssh  software-properties-
 ENV CPLUS_INCLUDE_PATH /usr/include/gdal
 ENV C_INCLUDE_PATH /usr/include/gdal
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 RUN npm install -g bower
 # Set the locale
 RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
