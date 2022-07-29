@@ -39,6 +39,7 @@ services:
       - "3306"
 
   web-pz:
+    build: .
     volumes:
       - ./run-server.sh:/run-server.sh
       - ./wait-for-it.sh:/wait-for-it.sh
