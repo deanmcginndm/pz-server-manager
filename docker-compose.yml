@@ -21,8 +21,6 @@ services:
       - "16262-16272:16262-16272"
       - "27431:27015"
     volumes:
-      - ./server-data:/server-data
-      - ./server-files:/server-files
       - ./pz_server_manager:/pz_server_manager
 
   db:
@@ -47,7 +45,7 @@ services:
     build: .
     command: tail -f /dev/null
     volumes:
-      - ./:/opt/pz
+      - ./:/pz_server_manager
 #    command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
     links:
       - "db:database"
