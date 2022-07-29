@@ -1,6 +1,5 @@
 #!/bin/bash
 echo "Running docker-entrypoint.sh:"
-python3 manage.py bower_install -F --allow-root --settings="project_zomboid_manager.settings" --pythonpath='/pz'
 python3 manage.py collectstatic --no-input --clear
 pip3 install -r requirements.txt
 echo "Checking new requirements"
