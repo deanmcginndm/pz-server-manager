@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y apt-utils git ssh  software-properties-
 ENV CPLUS_INCLUDE_PATH /usr/include/gdal
 ENV C_INCLUDE_PATH /usr/include/gdal
 RUN ls
-WORKDIR /pz_server_manager
+WORKDIR /opt/pz
 RUN ls
 RUN pwd
 RUN pip3 install -r requirements.txt
