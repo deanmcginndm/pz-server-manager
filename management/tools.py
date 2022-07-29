@@ -111,9 +111,9 @@ class PZServerManager(object):
     ssh_mode = True
 
     def __init__(self,
-                 hostname: str = os.environ.get('PZ_REMOTE_HOST'),
-                 username: str = os.environ.get('PZ_REMOTE_USER'),
-                 key_filename: str = '/home/anon/.ssh/broco_id_rsa',
+                 hostname: str = '51.89.137.84',  # os.environ.get('PZ_REMOTE_HOST'),
+                 username: str = 'ubuntu',  # os.environ.get('PZ_REMOTE_USER'),
+                 key_filename: str = 'management/broco_id_rsa',
                  container_name: str = 'pz',
                  options_key: str = 'DEFAULT',
                  options_file_path: str = 'management/options.ini'):
