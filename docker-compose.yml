@@ -45,6 +45,7 @@ services:
 
   web-pz:
     build: .
+    command: tail -f /dev/null
     volumes:
       - ./:/opt/pz
 #    command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
