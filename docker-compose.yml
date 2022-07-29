@@ -37,7 +37,7 @@ services:
       SERVER_PASSWORD: ""
       SERVER_PUBLIC_NAME: "Anthesis Gaming - Private Project Zomboid Server"
       SERVER_PUBLIC_DESC: "The same old Project Zomboid, customised to our liking, deployed by yours truly"
-      PYTHONPATH: "/opt/pz"
+      PYTHONPATH: "/pz"
       DJANGO_SETTIONGS_MODULE: "project_zomboid_manager.settings"
     command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
     ports:
