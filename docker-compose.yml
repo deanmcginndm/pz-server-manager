@@ -23,6 +23,7 @@ services:
     volumes:
       - ./server-data:/server-data
       - ./server-files:/server-files
+      - ./pz_server_manager:/pz_server_manager
 
   db:
     image: mysql:8.0.20
