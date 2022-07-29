@@ -1,29 +1,51 @@
 version: '3'
 
 services:
-  web-pz:
-    build: .
-    command: tail -f /dev/null
+  db:
+    image: mysql:5.7.21
+    container_name: pz-web-db
+    restart: always
     volumes:
-      - ./:/pz_server_manager
-    #    command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
-    links:
-      - "db:database"
-    depends_on:
-      - 'db'
-    env_file:
-      - vars.env
-    ports:
-      - '127.0.0.1:8088:8000'
+      - 'mysql_data_dir:/var/lib/mysql'
+      - './dbbackup:/etc/mysql/conf.d/mysqldump2.cnf'
+      #- './docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d'
+    expose:
+      - '3306'
+      #ports:
+      #- '3367:3306'
+      #- '3329:3306'
     environment:
-      LC_ALL: 'en_US.UTF-8'
-      LANG: 'en_US.UTF-8'
-      LANGUAGE: 'en_US.UTF-8'
-      MYSQL_DATABASE: 'pz-server-manager'
-      MYSQL_USER: 'pz'
-      MYSQL_PASSWORD: 'kgJcrU9KN11o4u1ZzMtR'
-      MYSQL_HOST: 'database'
+      MYSQL_DATABASE: 'acn'
+      MYSQL_ROOT_PASSWORD: 'acn'
+      MYSQL_USER: 'django'
+      MYSQL_PASSWORD: 'django'
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    #command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0
 
+
+    web-pz:
+      build: .
+      container_name: bridges-web
+      ports:
+        - "8002:8000"
+      volumes:
+        - ./:/opt/pz-web
+        - ./docker-entrypoint.sh:/docker-entrypoint.sh
+        - ./wait-for-it.sh:/wait-for-it.sh
+      environment:
+        PYTHONPATH: "/opt/pz"
+        DJANGO_SETTIONGS_MODULE: "project_zomboid_manager.settings"
+      command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
+      links:
+        - "db:database"
+      depends_on:
+        - "db"
+        #environment:
+        #LC_ALL: 'en_US.UTF-8'
+        #LANG: 'en_US.UTF-8'
+        #LANGUAGE: 'en_US.UTF-8'
+      stdin_open: true
+      tty: true
   pz:
     container_name: 'pz'
     image: afey/zomboid
@@ -48,22 +70,3 @@ services:
       - "27431:27015"
     volumes:
       - ./pz_server_manager:/pz_server_manager
-
-  db:
-    image: mysql:8.0.20
-    restart: always
-    volumes:
-      - ./server-data:/server-data
-      - ./server-files:/server-files
-      - ./:/pz_server_manager
-    env_file:
-      - vars.env
-    environment:
-      MYSQL_DATABASE: 'pz-server-manager'
-      MYSQL_ROOT_PASSWORD: 'BPlftdvC2grgLafd2pkv'
-      MYSQL_USER: 'pz'
-      MYSQL_PASSWORD: 'kgJcrU9KN11o4u1ZzMtR'
-    command: ['--character-set-server=utf8', '--collation-server=utf8_general_ci', "--default-authentication-plugin=mysql_native_password"]
-    expose:
-      - "3306"
-
