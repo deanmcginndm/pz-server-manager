@@ -23,29 +23,29 @@ services:
     #command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0
 
 
-    web-pz:
-      build: .
-      container_name: bridges-web
-      ports:
-        - "8002:8000"
-      volumes:
-        - ./:/opt/pz-web
-        - ./docker-entrypoint.sh:/docker-entrypoint.sh
-        - ./wait-for-it.sh:/wait-for-it.sh
-      environment:
-        PYTHONPATH: "/opt/pz"
-        DJANGO_SETTIONGS_MODULE: "project_zomboid_manager.settings"
-      command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
-      links:
-        - "db:database"
-      depends_on:
-        - "db"
-        #environment:
-        #LC_ALL: 'en_US.UTF-8'
-        #LANG: 'en_US.UTF-8'
-        #LANGUAGE: 'en_US.UTF-8'
-      stdin_open: true
-      tty: true
+  web-pz:
+    build: .
+    container_name: bridges-web
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./:/opt/pz-web
+      - ./docker-entrypoint.sh:/docker-entrypoint.sh
+      - ./wait-for-it.sh:/wait-for-it.sh
+    environment:
+      PYTHONPATH: "/opt/pz"
+      DJANGO_SETTIONGS_MODULE: "project_zomboid_manager.settings"
+    command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
+    links:
+      - "db:database"
+    depends_on:
+      - "db"
+      #environment:
+      #LC_ALL: 'en_US.UTF-8'
+      #LANG: 'en_US.UTF-8'
+      #LANGUAGE: 'en_US.UTF-8'
+    stdin_open: true
+    tty: true
   pz:
     container_name: 'pz'
     image: afey/zomboid
