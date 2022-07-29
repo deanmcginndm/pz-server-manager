@@ -28,7 +28,6 @@ services:
     restart: unless-stopped
     depends_on:
       - 'db'
-      - 'web-pz'
     links:
       - "db:database"
     env_file:
