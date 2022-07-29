@@ -5,6 +5,9 @@ RUN apt-get update && apt-get install -y apt-utils git ssh  software-properties-
 ENV CPLUS_INCLUDE_PATH /usr/include/gdal
 ENV C_INCLUDE_PATH /usr/include/gdal
 #WORKDIR home/ubuntu/pz_server_manager
+RUN echo $USER
+RUN cd home/$USER/
+WORKDIR .
 RUN ls
 RUN pwd
 RUN pip install -r requirements.txt
