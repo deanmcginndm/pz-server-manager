@@ -5,7 +5,7 @@ services:
     image: mysql
     container_name: pz-web-db
     restart: always
-    volumes:
+#    volumes:
 #      - 'mysql_data_dir:/var/lib/mysql'
       #- './docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d'
     expose:
