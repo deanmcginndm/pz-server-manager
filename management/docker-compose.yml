@@ -23,12 +23,15 @@ services:
     volumes:
       - ./server-data:/server-data
       - ./server-files:/server-files
+      - 'mysql_data_dir:/var/lib/mysql'
 
   db:
     image: mysql:8.0.20
     restart: always
     volumes:
       - 'mysql_data_dir:/var/lib/mysql'
+    env_file:
+      - vars.env
     environment:
       MYSQL_DATABASE: 'pz-server-manager'
       MYSQL_ROOT_PASSWORD: 'BPlftdvC2grgLafd2pkv'
@@ -49,6 +52,8 @@ services:
       - "db:database"
     depends_on:
       - 'db'
+    env_file:
+      - vars.env
     environment:
       LC_ALL: 'en_US.UTF-8'
       LANG: 'en_US.UTF-8'
