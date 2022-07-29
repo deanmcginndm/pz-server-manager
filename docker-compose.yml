@@ -42,7 +42,7 @@ services:
       - "3306"
 
   web-pz:
-    build: .
+    build: management
     volumes:
       - ./:/opt/pz
       - ./run-server.sh:/run-server.sh
