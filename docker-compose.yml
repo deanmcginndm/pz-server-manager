@@ -39,6 +39,7 @@ services:
       SERVER_PUBLIC_DESC: "The same old Project Zomboid, customised to our liking, deployed by yours truly"
       PYTHONPATH: "/pz"
       DJANGO_SETTIONGS_MODULE: "project_zomboid_manager.settings"
+      INSTDIR: "/pz/server-files/"
     command: /wait-for-it.sh db:3306 -t 5 -- /docker-entrypoint.sh
     ports:
       - "8002:8000"
@@ -49,8 +50,9 @@ services:
       - "27431:27015"
     volumes:
       - ./:/pz
-      - ./docker-entrypoint.sh:/docker-entrypoint.sh
-      - ./wait-for-it.sh:/wait-for-it.sh
+      - ./pz/docker-entrypoint.sh:/pz/docker-entrypoint.sh
+      - ./pz/wait-for-it.sh:/pz/wait-for-it.sh
+      - ./pz/server-data:/pz/server-data
     stdin_open: true
 
     tty: true
