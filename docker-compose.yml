@@ -51,6 +51,7 @@ services:
       - "27431:27015"
     volumes:
       - /home/ubuntu/pz-server-manager:/pz
+      - /home/ubuntu/pz-server-manager/server-files:/root/Zomboid/
     stdin_open: true
 
     tty: true
