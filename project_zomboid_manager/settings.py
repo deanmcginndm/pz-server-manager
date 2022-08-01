@@ -25,7 +25,7 @@ SECRET_KEY = 'ne%i7m#h8etzwc+p&(96+ho8n28^%i=+dzx+q9y3@x^1!8-$18'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '51.89.137.84'   ]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '51.89.137.84']
 
 
 # Application definition
@@ -78,6 +78,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'game': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'server-data/db/anthesis_pzserver.db'),
     }
 }
 
