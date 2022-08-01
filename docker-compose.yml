@@ -32,7 +32,7 @@ services:
       - "db:database"
     env_file:
       - vars.env
-#    environment:
+    environment:
 #      SERVER_PORT: 16261
 #      SERVER_PASSWORD: "temp"
       SERVER_NAME: "anthesis-pzserver"
