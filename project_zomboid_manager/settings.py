@@ -81,7 +81,7 @@ DATABASES = {
     },
     'game': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'server-data/db/anthesis_pzserver.db'),
+        'NAME': os.path.join(BASE_DIR, 'server-data/db/anthesis-pzserver.db'),
     }
 }
 
