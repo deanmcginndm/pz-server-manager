@@ -6,7 +6,7 @@ echo "Checking new requirements"
 echo "Applying database migrations"
 #python3 manage.py migrate
 echo "Starting pz server"
-pwd
+cd server-files/
 ./start-server.sh &
 echo "Starting django dev server"
 python3 manage.py runserver 0.0.0.0:8000
