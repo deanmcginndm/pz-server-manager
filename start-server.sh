@@ -7,7 +7,7 @@
 #
 ############
 echo $INSTDIR
-INSTDIR="`dirname $0`" ; cd "${INSTDIR}" ; INSTDIR="`pwd`"
+#INSTDIR="`dirname $0`" ; cd "${INSTDIR}" ; INSTDIR="`pwd`"
 echo ${INSTDIR}
 if "${INSTDIR}/jre64/bin/java" -version > /dev/null 2>&1; then
 	echo "64-bit java detected"
