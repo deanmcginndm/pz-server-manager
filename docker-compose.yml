@@ -35,9 +35,9 @@ services:
 #    environment:
 #      SERVER_PORT: 16261
 #      SERVER_PASSWORD: "temp"
-#      SERVER_NAME: "anthesis-pzserver"
-#      SERVER_PUBLIC_NAME: "Anthesis Gaming - Private Project Zomboid Server"
-#      SERVER_PUBLIC_DESC: "The same old Project Zomboid, customised to our liking, deployed by yours truly"
+      SERVER_NAME: "anthesis-pzserver"
+      SERVER_PUBLIC_NAME: "Anthesis Gaming - Private Project Zomboid Server"
+      SERVER_PUBLIC_DESC: "The same old Project Zomboid, customised to our liking, deployed by yours truly"
 #      PYTHONPATH: "/pz"
 #      DJANGO_SETTIONGS_MODULE: "project_zomboid_manager.settings"
 #      INSTDIR: "/pz/server-files/"
