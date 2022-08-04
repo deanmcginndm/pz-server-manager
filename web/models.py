@@ -17,6 +17,18 @@ class Localplayers(models.Model):
         db_table = 'localPlayers'
 
 
+class RawBinaryField(models.BinaryField):
+    def value_to_string(self, obj):
+        """Binary data is serialized as base64"""
+        return self.value_from_object(obj)
+
+    def to_python(self, value):
+        # If it's a string, it should be base64-encoded data
+        if isinstance(value, str):
+            return value.encode('ascii')
+        return value
+
+
 class Networkplayers(models.Model):
     world = models.TextField(blank=True, null=True)
     username = models.TextField(blank=True, null=True)
@@ -27,7 +39,7 @@ class Networkplayers(models.Model):
     y = models.TextField(blank=True, null=True)  # This field type is a guess.
     z = models.TextField(blank=True, null=True)  # This field type is a guess.
     worldversion = models.IntegerField(blank=True, null=True)
-    data = models.BinaryField(blank=True, null=True)
+    data = RawBinaryField(blank=True, null=True)
     isdead = models.BooleanField(db_column='isDead', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
